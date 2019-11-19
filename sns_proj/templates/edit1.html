@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>You entered the following image</h1>
+    </div>
+    <div class="align-center">
+        {% for image in object_list %}
+            <img src="{{ image.data.url }}" class="mx-auto d-block img-fluid" alt="">
+        {% endfor %}
+    </div>
+</div>
+<br>
+<br>
+<div class="container align-items-center">
+    <h3 class="text-center">Please Select any of the following:</h3>
+    <div class="card bg-dark text-white">
+        <div class="card-body"><a href="#">Blur</a></div>
+    </div>
+    <br>
+    <div class="card bg-dark text-white">
+        <div class="card-body"><a href="#">Emboss</a></div>
+    </div>
+    <br>
+    <div class="card bg-dark text-white">
+       <div class="card-body"><a href="#" class="text-white">Zoom</a></div>
+    </div>
+    <br>
+    <div class="card bg-dark text-white">
+        <div class="card-body"><a href="#">Sharpen</a></div>
+    </div>
+</div>
+
+{% endblock %}

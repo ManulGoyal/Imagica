@@ -179,40 +179,8 @@ Mat addPadding(const Mat& img) {
     return mat;
 }
 
-Mat addPadding2(const Mat& img) {
-    int w = N*ceil(img.cols/(double)N), h = N*ceil(img.rows/(double)N);
-    Mat mat(h, w, CV_16SC3, Scalar(0, 0, 0));
-    for (int i = 0; i < img.rows; i++)
-    {
-        cptr(p1, i, img, short);
-        ptr(p2, i, mat, short);
-        for (int j = 0; j < 3*img.cols; j += 3)
-        {
-            p2[j] = p1[j]; p2[j+1] = p1[j+1]; p2[j+2] = p1[j+2];
-        }
-        
-    }
-    return mat;
-}
-
 Mat getBlock(const Mat& img, int x, int y, int l) {
     Mat block(N, N, CV_64FC1);
-    for (int i = 0; i < N; i++)
-    {
-        cptr(p1, x+i, img, uint8);
-        ptr(p2, i, block, double);
-        for (int j = 0, k = 0; j < N; j++, k += 3)
-        { 
-            // for (int k = 0; k < 3; k++) p2[j+k] = p1[y+j+k];
-            p2[j] = p1[y+k+l];
-        }
-        
-    }
-    return block;
-}
-
-Mat getBlock2(const Mat& img, int x, int y, int l) {
-    Mat block(N, N, CV_1);
     for (int i = 0; i < N; i++)
     {
         cptr(p1, x+i, img, uint8);
@@ -235,75 +203,6 @@ Mat getIDct(const Mat& img) {
     return dctMatrix_t*img*dctMatrix;
 }
 
-// Mat showImg(const Mat& img, int Q=50) {
-//     createDctMatrix();
-//     // Mat ycbcr = convertToYCbCr(img);
-//     Mat compressed(img.rows, img.cols, CV_8UC3);
-    
-//     Mat padded = addPadding(img);
-//     Mat temp(padded.rows, padded.cols, CV_16SC3); 
-//     // cout << padded;
-//     uint8 qmaty[N][N];
-//     uint8 qmatc[N][N];
-//     getQuantizationMatrix(qmaty, Q, LUM);
-//     getQuantizationMatrix(qmatc, Q, CHROM);
-//     // for (int i = 0; i < 8; i++)
-//     // {
-//     //     for (int j = 0; j < 8; j++)
-//     //     {
-//     //         cout<<(int)qmatc[i][j]<<" ";
-//     //     }
-//     //     cout<<endl;
-//     // }
-    
-//     for (int i = 0; i < padded.rows; i+=N)
-//     {
-//         for (int j = 0, j2 = 0; j < padded.cols; j+=N, j2 += 3*N)
-//         {
-//             for (int l = 0; l < 3; l++)
-//             {
-//                 Mat block = getBlock(padded, i, j2, l)-128;
-//                 // Mat fdct = getDct(block);
-//                 // Mat quantized = (l == 0) ? divideMat(fdct, qmaty) : divideMat(fdct, qmatc);
-//                 // for (int m = 0; m < N; m++)
-//                 // {
-                    
-//                 //     cptr(ip, m, quantized, short);
-//                 //     ptr(op, i+m, temp, short);
-//                 //     for (int n1 = 0, n2 = 0; n1 < N; n1++, n2+=3)
-//                 //     {
-                        
-//                 //         op[j2+n2+l] = ip[n1];
-//                 //     }
-                    
-//                 // }
-//                 Mat dequantized = multiplyMat(quantized, qmaty);
-//                 Mat idct = getIDct(dequantized);
-//                 // printDoubleMat(idct);
-//                 // cout << "-----------------------------"<<endl;
-//                 for (int m = 0; m < N; m++)
-//                 {
-//                     if(i+m >= img.rows) break;
-//                     cptr(ip, m, idct, double);
-//                     ptr(op, i+m, compressed, uint8);
-//                     for (int n1 = 0, n2 = 0; n1 < N; n1++, n2+=3)
-//                     {
-//                         if(j+n1 >= img.cols) break;
-//                         op[j2+n2+l] = roundPixel127(ip[n1]) + 128;
-//                     }
-                    
-//                 }
-                
-//             }
-//         }
-//     }
-//     std::vector<int> compression_params;
-//     compression_params.push_back(IMWRITE_PNG_COMPRESSION);
-//     compression_params.push_back(0);
-//     imwrite("temp.png", temp, compression_params);
-//     return convertToRGB(compressed);
-// }
-
 Mat compressImg(const Mat& img, int Q=50) {
     createDctMatrix();
     Mat ycbcr = convertToYCbCr(img);
@@ -316,14 +215,7 @@ Mat compressImg(const Mat& img, int Q=50) {
     uint8 qmatc[N][N];
     getQuantizationMatrix(qmaty, Q, LUM);
     getQuantizationMatrix(qmatc, Q, CHROM);
-    // for (int i = 0; i < 8; i++)
-    // {
-    //     for (int j = 0; j < 8; j++)
-    //     {
-    //         cout<<(int)qmatc[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
+
     
     for (int i = 0; i < padded.rows; i+=N)
     {
@@ -334,22 +226,9 @@ Mat compressImg(const Mat& img, int Q=50) {
                 Mat block = getBlock(padded, i, j2, l)-128;
                 Mat fdct = getDct(block);
                 Mat quantized = (l == 0) ? divideMat(fdct, qmaty) : divideMat(fdct, qmatc);
-                for (int m = 0; m < N; m++)
-                {
-                    
-                    cptr(ip, m, quantized, short);
-                    ptr(op, i+m, temp, short);
-                    for (int n1 = 0, n2 = 0; n1 < N; n1++, n2+=3)
-                    {
-                        
-                        op[j2+n2+l] = ip[n1];
-                    }
-                    
-                }
                 Mat dequantized = multiplyMat(quantized, qmaty);
                 Mat idct = getIDct(dequantized);
-                // printDoubleMat(idct);
-                // cout << "-----------------------------"<<endl;
+
                 for (int m = 0; m < N; m++)
                 {
                     if(i+m >= img.rows) break;
@@ -366,98 +245,20 @@ Mat compressImg(const Mat& img, int Q=50) {
             }
         }
     }
-    std::vector<int> compression_params;
-    compression_params.push_back(IMWRITE_PNG_COMPRESSION);
-    compression_params.push_back(0);
-    imwrite("temp.png", temp, compression_params);
+
     return convertToRGB(compressed);
 }
 
-int main( int argc, char** argv ) {
-    // createDctMatrix();
-    // cout<<sizeof(short);
-    // printDoubleMat(dctMatrix);
-    //  cout<<dctMatrix*dctMatrix_t;
-    // printDoubleMat(dctMatrix_t);
-    
-    // Mat m1(3, 3, CV_32FC3, Scalar(2.0, 1.0, 3.0));
-    // Mat m2(3, 3, CV_32FC3, Scalar(2.0, 1.0, 3.0));
-    // cout<<m1*m2;
-    // uint8 mmat[8][8] = {  {154, 123, 123, 123, 123, 123, 123, 136},
-    //                     {192, 180, 136, 154, 154, 154, 136, 110},
-    //                     {254, 198, 154, 154, 180, 154, 123, 123},
-    //                     {239, 180, 136, 180, 180, 166, 123, 123},
-    //                     {180, 154, 136, 167, 166, 149, 136, 136},
-    //                     {128, 136, 123, 136, 154, 180, 198, 154},
-    //                     {123, 105, 110, 149, 136, 136, 180, 166},
-    //                     {110, 136, 123, 123, 123, 136, 154, 136}};
-    // Mat image(8, 8, CV_8UC3);
-    // for (int i = 0; i < 8; i++)
-    // {
-    //     ptr(p, i, image, uint8);
-    //     for (int j = 0, k =0 ; j < 24; k++,j+=3)
-    //     {
-    //         p[j] = p[j+1] = p[j+2] = mmat[i][k];
-    //     }
-    // }
+int main(int argc, char* argv[]) {
 
-    // {
-    //     for (int j = 0; j < padded.cols; j+=N)
-    //     {
-    //         for (int l = 0; l < 3; l++)
-    //         {
-    //             Mat block = getBlock(padded, i, j, l)-128;
-    //             Mat fdct = getDct(block);
-    //             Mat quantized = divideMat(fdct, qmaty);
-    //             Mat dequantized = multiplyMat(quantized, qmaty);
-    //             Mat idct = getIDct(dequantized);
-    //             // printDoubleMat(idct);
-    //             // cout << "-----------------------------"<<endl;
-    //             for (int m = 0; m < N; m++)
-    //             {
-    //                 if(i+m >= img.rows) break;
-    //                 cptr(ip, m, idct, double);
-    //                 ptr(op, i+m, compressed, uint8);
-    //                 for (int n1 = 0, n2 = 0; n1 < N; n1++, n2+=3)
-    //                 {
-    //                     if(j+n1 >= img.cols) break;
-    //                     op[j+n2+l] = roundPixel127(ip[n1]) + 128;
-    //                 }
-                    
-    //             }
-                
-    //         }
-    //     }
-    // }
-        
-    // }
     Mat image;
-    image = imread("laptop.tiff" , IMREAD_COLOR);
-    Mat c = compressImg(image, 20);
-    // imwrite("new.jpg", )
-    // cout << c;
+    image = imread(argv[1] , IMREAD_COLOR);
+    Mat c = compressImg(image, atoi(argv[2]));
 
     std::vector<int> compression_params;
     compression_params.push_back(IMWRITE_JPEG_QUALITY);
     compression_params.push_back(100);
-    // imwrite("b20.jpg", c, compression_params);
-    // // Mat im2 = Mat(3, 4, CV_8UC3, Scalar(30, 100, 200));
-    // if(! image.data ) {
-    // std::cout <<  "Could not open or find the image" << std::endl ;
-    // return -1;
-    // }
-    // // cout<<image;
-    // namedWindow( "D1", WINDOW_AUTOSIZE );
-    // namedWindow("D2", WINDOW_AUTOSIZE);
-    // imshow("D1", image);
-    // imshow( "D2", c );
-    
-    
-    // Mat mm = convertToYCbCr(image);
-    // imshow("D2", splitMat(mm, 0));
-    // cout<<im2;
-    // Mat mat = createDctMatrix();
-    // printDoubleMat(mat);
-    // waitKey(0);
+    imwrite("output.jpg", c, compression_params);
+   
     return 0;
 }

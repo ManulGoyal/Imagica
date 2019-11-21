@@ -1,4 +1,5 @@
-//Image Resizing using Bicubic Interpolation
+// Image Resizing using Bicubic Interpolation
+// Reference: https://blog.demofox.org/2015/08/15/resizing-images-with-bicubic-interpolation/
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <cmath>
@@ -17,15 +18,15 @@ double Bicubic (double A, double B, double C, double D, double t) {
     double d = B; 
     return a*t*t*t + b*t*t + c*t + d;
 }
-Mat scale(const Mat M, double ratio, int r1, int c1, int padding) {
-    int row = long(round(double(r1)*ratio));
-    int col = long(round(double(c1)*ratio));
+Mat scale(const Mat M, double ratio1, double ratio2, int r1, int c1, int padding) {
+    int row = long(round(double(r1)*ratio1));
+    int col = long(round(double(c1)*ratio2));
     Mat m(row,col,CV_8UC3,Scalar(0,0,0));
     for(int c = 0; c < 3; c++) {
         for(int i = 0; i < row; i++) {
-            double v = double(i)/double(ratio);
+            double v = double(i)/double(ratio1);
             for(int j = 0; j < col; j++) {
-                double u = double(j)/double(ratio);
+                double u = double(j)/double(ratio2);
                 int yint = round(u-0.5) + padding-1;
                 double yfract = u - floor(u);
                 int xint = round(v-0.5) + padding-1;
@@ -69,7 +70,8 @@ int main( int argc, char** argv ){
     if( argc > 1){
         imageName = argv[1];
     }
-    double ratio = (argv[2][0] - '0') + (argv[2][2] - '0')/10.0;
+    double ratio1 = atof(argv[3]);
+    double ratio2 = atof(argv[4]);
     Mat image;
     image = imread( imageName, IMREAD_COLOR ); 
     if( image.empty() ) {
@@ -80,9 +82,9 @@ int main( int argc, char** argv ){
     int size = M.rows;
     int c = 3, N = 3;
     int padding = 2;
-    Mat M1 = addpadding(M, padding = max(2.0,abs(M.rows*(ratio-1))));
-    Mat M2 = scale(M1,ratio,M.rows,M.cols,padding);
-    imwrite("output.jpg",M2);
+    Mat M1 = addpadding(M, padding = max(2.0,max(abs(M.rows*(ratio1-1)), abs(M.cols*(ratio2-1)))));
+    Mat M2 = scale(M1,ratio1, ratio2,M.rows,M.cols,padding);
+    imwrite(argv[2],M2);
     waitKey(0);
     return 0;
 }

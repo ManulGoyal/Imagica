@@ -7,22 +7,60 @@
     <link rel="stylesheet" href="styles.css">
     <title>{% block title%}Imagica{% endblock %}</title>
 </head>
-<body>
-    <nav class = "navbar navbar-expand-sm bg-dark navbar-dark">
-        <a href="#"><h1 class="text-white">IMAGICA</h1></a>
+<body style="background-color: #65ccb8;">
+    <!-- <div class="jumbotron jumbotron-fluid bg-dark" style="margin-bottom:0">
+            <h1 class="display-1 text-white">IMAGICA</h1>
+            <p class="display- text-white">Basic Image Editor</p> 
+    </div> -->
+    <nav class = "navbar text-center navbar-expand-sm" style="background-color: #161b21;">
+        <a href="#"><h1 class="text-center" style="color: #65ccb8; padding-bottom: 9%; padding-top: 9%; align-content: center;">IMAGICA</h1></a>
     </nav>
     {% block content %}
-    <div class="container ">
+    <div class="container-fluid" style="padding-top: 12%; padding-bottom: 17;">
         <div class = "align-middle">
             <div class = "row align-items-center justify-content-center">
-                <h1 class="weight-bold">A Basic Image Editing WebApp</h1>
+                <h1 class="weight-bold" style="color: #f2f2f2;">A Basic Image Editing WebApp</h1>
             </div>
             <br>
-            <div class="row align-items-center justify-content-center">
+            <div class="row align-items-center justify-content-center" style="padding-top: 4%;padding-bottom: 8%">
                     <a href="enter"><button type="submit" class = "btn">Start Editing</button></a>
             </div>
         </div>    
     </div>
+    
+    <div class="container-fluid mt-4" style="background-color: #161b21; padding-top: 4%; padding-bottom: 20%;">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 xs-12 mt-3" style="padding-left: 0%;">
+                    <h1 class="text-left" style="color: #65ccb8;">Team Members:</h1>
+                </div>
+                <div class="col-md-4 col-sm-12 xs-12">
+                        <h3 class="text-center" style="color: #65ccb8;">Manul Goyal</h3>
+                </div>
+                <div class="col-md-4 col-sm-12 xs-12">
+                        <h3 class="text-center" style="color: #65ccb8;">Dev Lathiya</h3>
+                </div>
+                <div class="col-md-4 col-sm-12 xs-12">
+                        <h3 class="text-center" style="color: #65ccb8;">Rajat Sharma</h3>
+                </div>
+                <div class="col-md-6 col-sm-12 xs-12" style="color: #65ccb8;">
+                    <h3 class="text-center" style="color: #65ccb8;">Yash Chaubey</h3>
+                </div>
+                <div class="col-md-6 col-sm-12 xs-12" style="color: #65ccb8;">
+                        <h3 class="text-center" style="color: #65ccb8;">Pushpank Katare</h3>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="page-footer font-small blue" style ="position: relative;bottom: 0;left: 0; width: 100%;">
+
+        <div class="footer-copyright text-center text-white py-3" style="background-color: #161b21;">© 2019 Copyright:
+              
+        </div>
+      
+      </footer>
     {% endblock %}
 
 

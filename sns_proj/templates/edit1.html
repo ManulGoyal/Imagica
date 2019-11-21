@@ -5,30 +5,43 @@
     <div class="text-center">
         <h1>You entered the following image</h1>
     </div>
-    <div class="align-center">
+    <div class="align-center" style="padding-top: 5%">
         {% for image in object_list %}
             <img src="{{ image.data.url }}" class="mx-auto d-block img-fluid" alt="">
         {% endfor %}
     </div>
 </div>
-<br>
-<br>
-<div class="container align-items-center">
-    <h3 class="text-center">Please Select any of the following:</h3>
-    <div class="card bg-dark text-white">
-        <div class="card-body"><a href="#">Blur</a></div>
+<h1 style="padding-top: 5%; color: black;">Please Select any of the following operations:</h1>
+<div class="container-fluid" style="padding-top: 3%;">
+    <div class="row align-items-center">
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">GAUSSIAN BLUR</h4></div></a>        
+        </div>
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">EMBOSS</h4></div></a>        
+        </div>
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">SHARPEN</h4></div></a>        
+        </div>
     </div>
-    <br>
-    <div class="card bg-dark text-white">
-        <div class="card-body"><a href="#">Emboss</a></div>
+    <div class="row align-items-center" style="padding-top: 3%;">
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">COMPRESS</h3></div></a>        
+        </div>
+        <div class="col" style="">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">ZOOM</h3></div></a>        
+        </div>
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 9%;">BOX BLUR</h3></div></a>        
+        </div>
     </div>
-    <br>
-    <div class="card bg-dark text-white">
-       <div class="card-body"><a href="#" class="text-white">Zoom</a></div>
-    </div>
-    <br>
-    <div class="card bg-dark text-white">
-        <div class="card-body"><a href="#">Sharpen</a></div>
+    <div class="row align-items-center" style="padding-top: 3%;">
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 6%;">EDGE DETECTION</h3></div></a>        
+        </div>
+        <div class="col">
+            <a href="#"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 6%;">CUSTOM KERNEL</h3></div></a>        
+        </div>
     </div>
 </div>
 

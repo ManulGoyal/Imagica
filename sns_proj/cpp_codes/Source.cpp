@@ -78,7 +78,10 @@ int main()
 	int choice;
 	cin >> choice;
 	Mat src, dst;
-	src = imread("initial.jpg",ImreadModes::IMREAD_GRAYSCALE);
+	// src = imread("lenna.jpg",ImreadModes::IMREAD_GRAYSCALE);
+	src = imread("lenna.jpg",  IMREAD_COLOR);
+	// imwrite("out.jpg", src);
+	
 	if (!src.data)
 	{
 		return -1;
@@ -86,7 +89,11 @@ int main()
 	dst = src.clone();
 	for (int y = 0; y < src.rows; y++)
 		for (int x = 0; x < src.cols; x++)
-			dst.at<uchar>(y, x) = 0.0;
+		{
+			dst.at<Vec3b>(y, x)[0] = 0.0;
+			dst.at<Vec3b>(y, x)[1] = 0.0;
+			dst.at<Vec3b>(y, x)[2] = 0.0;
+		}
 	if (choice == 1)
 	{
 		// Identical Image output...
@@ -150,7 +157,7 @@ int main()
 		}
 		circularIndexing(src, dst, Kernel);
 	}
-	imwrite("final.jpg", dst);
+	imwrite("out.jpg", dst);
 	// Boom!!!....Your wish has been granted...Image saved :)....
 	return 0;
 }

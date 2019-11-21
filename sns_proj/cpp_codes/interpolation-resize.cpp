@@ -69,7 +69,7 @@ int main( int argc, char** argv ){
     if( argc > 1){
         imageName = argv[1];
     }
-    double ratio = (argv[2][0] - '0') + (argv[2][1] - '0')/10.0;
+    double ratio = (argv[2][0] - '0') + (argv[2][2] - '0')/10.0;
     Mat image;
     image = imread( imageName, IMREAD_COLOR ); 
     if( image.empty() ) {

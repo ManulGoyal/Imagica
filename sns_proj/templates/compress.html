@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- <div class="row align-items-center" style="padding-top: 3%;">
+    <div class="col">
+        <a href="bilin"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 6%;">BILINEAR</h3></div></a>        
+    </div>
+    <div class="col">
+        <a href="bicub"><div class="container text-center" style="background-color: #161b21;"><h4 class="text-white" style="padding: 6%;">BICUBIC</h3></div></a>        
+    </div>
+</div> -->
+
+<form action={% url 'compressed' %} method="GET" style="padding-top: 15%;">
+    <div class = "row">
+    <label class="col">
+        Quality Factor
+        <input type="text" name="q">
+    </label>
+    <input type="submit" method="get">
+    </div>
+</form>
+{% endblock %}

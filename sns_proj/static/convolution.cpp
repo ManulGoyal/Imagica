@@ -1,3 +1,6 @@
+// usage: 	./output infile outfile choice [25 real numbers]
+//			choice between 1 to 6, if choice is 6, 25 real numbers given
+
 #include<iostream>
 #include<opencv2/imgproc/imgproc.hpp>
 #include<opencv2/highgui/highgui.hpp>
@@ -55,7 +58,7 @@ int main(int argc, char* argv[])
 	// inpfile choice val[25]
 	// if(argc != 4) return -1;
 	// Choice will be fed from user on the website....
-	int choice = atoi(argv[2]);
+	int choice = atoi(argv[3]);
 	Mat src;
 	src = imread(argv[1],ImreadModes::IMREAD_COLOR);
 	if (!src.data)
@@ -130,13 +133,13 @@ int main(int argc, char* argv[])
 		{
 			for (int j = 0; j < 5; j++)
 			{
-				Kernel[i][j] = atof(argv[5*i+j+3]);
+				Kernel[i][j] = atof(argv[5*i+j+4]);
 			}
 		}
 		applyConvolution(src, dst, Kernel);
 	} 
-	if(choice == 2) imwrite("output.jpg", dst_gray);
-	else imwrite("output.jpg", dst);
+	if(choice == 2) imwrite(argv[2], dst_gray);
+	else imwrite(argv[2], dst);
 	// Boom!!!....Your wish has been granted...Image saved :)....
 	return 0;
 }

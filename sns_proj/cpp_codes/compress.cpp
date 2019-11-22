@@ -1,3 +1,6 @@
+// usage:   ./output infile outfile Q
+//          Q = 1 to 100
+
 #include<opencv2/opencv.hpp>
 #include<iostream>
 typedef unsigned char uint8;
@@ -166,6 +169,7 @@ void getQuantizationMatrix(uint8 qmaty[N][N], int Q, int type) {
 Mat addPadding(const Mat& img) {
     int w = N*ceil(img.cols/(double)N), h = N*ceil(img.rows/(double)N);
     Mat mat(h, w, CV_8UC3, Scalar(0, 0, 0));
+    
     for (int i = 0; i < img.rows; i++)
     {
         cptr(p1, i, img, uint8);
@@ -174,8 +178,22 @@ Mat addPadding(const Mat& img) {
         {
             p2[j] = p1[j]; p2[j+1] = p1[j+1]; p2[j+2] = p1[j+2];
         }
+        Vec3b pixel = img.at<Vec3b>(i, img.cols-1);
+        for(int j = img.cols; j < w; j++) {
+            mat.at<Vec3b>(i, j) = pixel;
+        }
         
     }
+    for (int i = 0; i < w; i++)
+    {
+        Vec3b pixel = img.at<Vec3b>(img.rows-1, i);
+        for (int j = img.rows; j < h; j++)
+        {
+            mat.at<Vec3b>(j, i) = pixel;
+        }
+        
+    }
+    
     return mat;
 }
 
@@ -215,7 +233,6 @@ Mat compressImg(const Mat& img, int Q=50) {
     uint8 qmatc[N][N];
     getQuantizationMatrix(qmaty, Q, LUM);
     getQuantizationMatrix(qmatc, Q, CHROM);
-
     
     for (int i = 0; i < padded.rows; i+=N)
     {
@@ -249,16 +266,43 @@ Mat compressImg(const Mat& img, int Q=50) {
     return convertToRGB(compressed);
 }
 
-int main(int argc, char* argv[]) {
+double calculateMSE(const Mat& m1, const Mat& m2) {
+    double mse = 0;
+    for (int i = 0; i < m1.rows; i++)
+    {
+        cptr(p1, i, m1, uint8);
+        cptr(p2, i, m2, uint8);
+        for (int j = 0; j < 3*m1.cols; j+=3)
+        {
+            for (int l = 0; l < 3; l++)
+            {
+                mse += (p1[j+l]-p2[j+l])*(p1[j+l]-p2[j+l]);
+            }
+            
+        }
+        
+    }
+    mse = mse / (3*m1.rows*m1.cols);
+    return mse;
+}
 
+int main(int argc, char* argv[]) {
+   
     Mat image;
     image = imread(argv[1] , IMREAD_COLOR);
-    Mat c = compressImg(image, atoi(argv[2]));
+    Mat compressed = compressImg(image, atoi(argv[3]));
 
     std::vector<int> compression_params;
     compression_params.push_back(IMWRITE_JPEG_QUALITY);
     compression_params.push_back(100);
-    imwrite("output.jpg", c, compression_params);
-   
+    imwrite(argv[2], compressed, compression_params);
+
+    double mse = calculateMSE(image, compressed);
+    double psnr = 20*log10(255) - 10*log10(mse);
+
+    FILE* fp = fopen("psnr.txt", "w");
+    fprintf(fp, "%.3lf %.3lf", mse, psnr);
+    fclose(fp);
+
     return 0;
 }

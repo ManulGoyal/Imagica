@@ -1,1 +1,1 @@
-Mean Square Error: 188.619,  Peak-signal-to-noise-ratio : 25.375
+Mean Square Error: 18.229,  Peak-signal-to-noise-ratio : 35.523

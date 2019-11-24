@@ -12,11 +12,14 @@
 </div> -->
 
 <form action={% url 'rotated' %} method="GET" style="padding-top: 15%;">
-    <div class = "row">
-    <label class="col">
+    <div class = "row text-center">
+    <label class="col" style="color: #ffffff;">
         Degrees
         <input type="text" name="deg">
     </label>
+    </div>
+    <div class="container text-center" style="padding-top: 4%;">
+        <input type="submit" method="get" class="btn btn-primary btn-large">
     </div>
 </form>
 {% endblock %}

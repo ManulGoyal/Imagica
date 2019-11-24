@@ -5,67 +5,81 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{% block title%}Imagica{% endblock %}</title>
 </head>
-<body style="background-color: #65ccb8;">
-    <!-- <div class="jumbotron jumbotron-fluid bg-dark" style="margin-bottom:0">
-            <h1 class="display-1 text-white">IMAGICA</h1>
-            <p class="display- text-white">Basic Image Editor</p> 
-    </div> -->
-    <nav class = "navbar text-center navbar-expand-sm" style="background-color: #161b21;">
-        <a href="base"><h1 class="text-center" style="color: #65ccb8; padding-bottom: 9%; padding-top: 9%; align-content: center;">IMAGICA</h1></a>
-    </nav>
-    {% block content %}
-    <div class="container-fluid" style="padding-top: 12%; padding-bottom: 17;">
-        <div class = "align-middle">
-            <div class = "row align-items-center justify-content-center">
-                <h1 class="weight-bold" style="color: #f2f2f2;">A Basic Image Editing WebApp</h1>
-            </div>
-            <br>
-            <div class="row align-items-center justify-content-center" style="padding-top: 4%;padding-bottom: 8%">
-                    <a href="enter"><button type="submit" class = "btn">Start Editing</button></a>
-            </div>
-        </div>    
-    </div>
+<body style="background-color: #000000 ; padding-top: 10%;">
     
-    <div class="container-fluid mt-4" style="background-color: #161b21; padding-top: 4%; padding-bottom: 20%;">
-        <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 xs-12 mt-3" style="padding-left: 0%;">
-                    <h1 class="text-left" style="color: #65ccb8;">Team Members:</h1>
-                </div>
-                <div class="col-md-4 col-sm-12 xs-12">
-                        <h3 class="text-center" style="color: #65ccb8;">Manul Goyal</h3>
-                </div>
-                <div class="col-md-4 col-sm-12 xs-12">
-                        <h3 class="text-center" style="color: #65ccb8;">Dev Lathiya</h3>
-                </div>
-                <div class="col-md-4 col-sm-12 xs-12">
-                        <h3 class="text-center" style="color: #65ccb8;">Rajat Sharma</h3>
-                </div>
-                <div class="col-md-6 col-sm-12 xs-12" style="color: #65ccb8;">
-                    <h3 class="text-center" style="color: #65ccb8;">Yash Chaubey</h3>
-                </div>
-                <div class="col-md-6 col-sm-12 xs-12" style="color: #65ccb8;">
-                        <h3 class="text-center" style="color: #65ccb8;">Pushpank Katare</h3>
-                    </div>
-            </div>
+
+<div class="container-fluid">
+ <nav class="navbar navbar-expand-md fixed-top justify-content-center" style="background-color: #16161d">
+        <div class="justify-content-center">
+            <a class="navbar-brand" href="#"><h2 class="text-white" >IMAGICA</h2></a>
+        </div>
+    </nav>
+</div>
+{% block content %}
+
+    <div class="container-fluid" style="text-align: center; margin-top: 7%;">
+        <h3 class="text-white" style= "font-family: 'Roboto', sans-serif;">Our Signals and Systems Term Project</p>
+
+        <br>
+        <p>An Image Editing WebApp based on Convolution, Interpolation and DCT based Compression</p>
+
+    </div>
+
+    <div class="container-fluid justify-content-center" style=" padding-top: 10%; padding-bottom: 10%;">
+        <div class="container text-center">
+            <a href="enter"><button type="button" class ="btn btn-primary btn-lg" >Start Editing</button></a>
+
         </div>
     </div>
 
 
+        <div class="container-fluid" style="width: 80%; height: 32px; border-bottom: 2px solid black; text-align: center; border-color: #ffffff;">
+            <span style="font-size:240% ;background-color: #ffffff; padding: 1.4%; padding-left: 7% ;padding-right: 7% ;color: #000000; border-radius: 15%;">Team</span> <!--Padding is optional-->
+        </div>
     
-    {% endblock %}
-    <footer class="page-footer font-small blue" style ="position: fixed;bottom: 0;left: 0; width: 100%;">
-
-            <div class="footer-copyright text-center text-white py-3" style="background-color: #161b21;">© 2019 Copyright:
-                  
+    
+    
+        <div class="row text-center container-fluid" style="padding-bottom: 4%; padding-top: 10%; align-self: center;">
+            <div class="col-lg-4 col-md-6 mb-r animate-profile animated fadeInUp" style="padding-bottom: 4%;">
+                <div class="avatar" style="padding-bottom: 4%;">
+                    <img class="rounded-circle lazyloaded" src="media/images/lenna.jpg" alt="#">
+                </div>
+                <h4 class="text-white">Pushpank Katare</h4>
             </div>
-          
-          </footer>
-
-
-
+            <div class="col-lg-4 col-md-6 mb-r animate-profile animated fadeInUp" style="padding-bottom: 4%;">
+                <div class="avatar" style="padding-bottom: 4%;">
+                    <img class="rounded-circle lazyloaded" src="media/images/lenna.jpg" alt="#">
+                </div>
+                <h4 class="text-white">Rajat Sharma</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-r animate-profile animated fadeInUp" style="padding-bottom: 4%;">
+                <div class="avatar" style="padding-bottom: 4%;">
+                    <img class="rounded-circle lazyloaded" src="media/images/lenna.jpg" alt="#">
+                </div>
+                <h4 class="text-white">Dev Lathiya</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-r animate-profile animated fadeInUp" style="padding-bottom: 4%;">
+                <div class="avatar" style="padding-bottom: 4%;">
+                    <img class="rounded-circle lazyloaded" src="media/images/lenna.jpg" alt="#">
+                </div>
+                <h4 class="text-white">Yash Chaubey</h4>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-r animate-profile animated fadeInUp" style="padding-bottom: 4%;">
+                <div class="avatar" style="padding-bottom: 4%;">
+                    <img class="rounded-circle lazyloaded" src="media/images/lenna.jpg" alt="#">
+                </div>
+                <h4 class="text-white">Manul Goyal</h4>
+            </div>
+        </div>
+{% endblock %}
+        <footer class="container-fluid fixed-bottom" style="background-color: #16161d;">
+            <div class="footer-copyright text-center py-3" style="color: #ffffff;"><p>© 2019 Copyright    
+                <i class="fa fa-github" style="color: #ffffff; font-size: 25px; padding-left: 1%;"></i>
+            </div>
+        </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

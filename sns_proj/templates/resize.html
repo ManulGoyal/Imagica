@@ -12,16 +12,20 @@
 </div> -->
 
 <form action={% url 'resized' %} method="GET" style="padding-top: 15%;">
-    <div class = "row">
-    <label class="col">
+    <div class = "row text-center">
+    <label class="col" style="color: #ffffff;">
         X-Scale
         <input type="text" name="bilinx">
     </label>
-    <label class="col">
+    <label class="col" style="color: #ffffff;">
         Y-Scale
         <input type="text" name="biliny">
     </label>
-    <input type="submit" method="get">
+    <br>
+    
+</div>
+    <div class="container text-center" style="padding-top: 4%;">
+        <input type="submit" method="get" class="btn btn-primary btn-large">
     </div>
 </form>
 {% endblock %}

@@ -300,13 +300,8 @@ int main(int argc, char* argv[]) {
     double mse = calculateMSE(image, compressed);
     double psnr = 20*log10(255) - 10*log10(mse);
 
-<<<<<<< HEAD:sns_proj/static/compress.cpp
     FILE* fp = fopen(argv[4], "w");
     fprintf(fp, "Mean Square Error: %.3lf,  Peak-signal-to-noise-ratio : %.3lf", mse, psnr);
-=======
-    FILE* fp = fopen("psnr.txt", "w");
-    fprintf(fp, "%.3lf %.3lf", mse, psnr);
->>>>>>> origin/master:sns_proj/cpp_codes/compress.cpp
     fclose(fp);
 
     return 0;

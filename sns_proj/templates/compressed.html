@@ -3,14 +3,14 @@
 {% block content %}
 
 <div class = "container-fluid">
-    <div class="row">
+    <div class="row text-center">
         <div class="col" style="padding-top: 10%; padding-left: 10%;">
-            <h1>Original Image</h1>
+            <h1 style="color: #ffffff;">Original Image</h1>
             <img src="{{ path  }}" alt="">
         </div>
         <div class="col" style="padding-top: 10%; padding-right: 10%;">
-            <h1>Compressed Image</h1>
-        <img src="/media/images/output.jpg" alt="">
+            <h1 style="color: #ffffff;">Compressed Image</h1>
+        <img src="/media/images/output.png" alt="">
         </div>
     </div>
     <p>{{ psnr }}</p>

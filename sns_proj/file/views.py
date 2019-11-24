@@ -115,8 +115,9 @@ class CompressedView(View):
         qfactor = request.GET.get('q')
         obj = FILE.objects.order_by('-pk')[0]
         loc = obj.data.url
-        loc1 = BASE_DIR + '/static/compress ' + BASE_DIR + loc + ' ' + BASE_DIR + '/media/images/output.jpg ' + qfactor + ' ' + BASE_DIR  + '/media/images/psnr.txt'
-        os.system(loc1)
-        f = open(BASE_DIR + '/media/images/psnr.txt', 'r')
-        file_contents = f.read()
-        return render(request, 'compressed.html', {'path' : loc, 'psnr' : file_contents})
+        loc1 = BASE_DIR + '/static/encoder ' + BASE_DIR + loc + ' ' + BASE_DIR + '/media/images/output.imgc ' + qfactor 
+        loc2 = BASE_DIR + '/static/decoder ' + BASE_DIR + 'media/images/output.imgc ' '1 ' + BASE_DIR + '/media/images/output.png'
+        os.system(loc1+'&&'+loc2)
+        # f = open(BASE_DIR + '/media/images/psnr.txt', 'r')
+        # file_contents = f.read()
+        return render(request, 'compressed.html', {'path' : loc})

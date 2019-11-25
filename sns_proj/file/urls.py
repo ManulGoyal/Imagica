@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .views import HomePgView, EnterImgView , PreView, SharpView, BoxBlurView, EmbossView , GaussianBlurView ,EdgeDetectView, ResizeView, ResizedView, RotatedView, RotateView, CompressView, CompressedView
+from .views import HomePgView, EnterImgView , PreView, SharpView, BoxBlurView, EmbossView , GaussianBlurView ,EdgeDetectView, ResizeView, ResizedView, RotatedView, RotateView, CompressView, CompressedView, CustomView, CustomedView
 
 urlpatterns = [
     url(r'^$', HomePgView.as_view(), name = 'base'),
@@ -15,5 +15,8 @@ urlpatterns = [
     url(r'^edit1/rotate/$',RotateView.as_view(),name='rotate'),
     url(r'^edit1/rotate/rotated/$', RotatedView.as_view(), name='rotated'),
     url(r'^edit1/compress/$',CompressView.as_view(),name='compress'),
-    url(r'^edit1/compress/compressed/$', CompressedView.as_view(), name='compressed'),
+    url(r'^edit1/compress/compressed/$', CompressedView.as_view(), name='compressed'),  
+    url(r'^edit1/custom/$',CustomView.as_view(),name='custom'),
+    url(r'^edit1/custom/customed/$',CustomedView.as_view(),name='customed'),
+
 ]

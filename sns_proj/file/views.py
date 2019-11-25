@@ -116,8 +116,28 @@ class CompressedView(View):
         obj = FILE.objects.order_by('-pk')[0]
         loc = obj.data.url
         loc1 = BASE_DIR + '/static/encoder ' + BASE_DIR + loc + ' ' + BASE_DIR + '/media/images/output.imgc ' + qfactor 
-        loc2 = BASE_DIR + '/static/decoder ' + BASE_DIR + 'media/images/output.imgc ' '1 ' + BASE_DIR + '/media/images/output.png'
-        os.system(loc1+'&&'+loc2)
+        os.system(loc1)
+        loc2 = BASE_DIR + '/static/decoder ' + BASE_DIR + '/media/images/output.imgc ' '1 ' + BASE_DIR + '/media/images/output.png'
+        os.system(loc2)
+        
         # f = open(BASE_DIR + '/media/images/psnr.txt', 'r')
         # file_contents = f.read()
-        return render(request, 'compressed.html', {'path' : loc})
+        return render(request, 'compressed.html', {'path':loc,'loc1':loc1, 'loc2':loc2})
+
+class CustomView(TemplateView):
+    template_name = 'custom.html'
+
+class CustomedView(View):
+    def get(self, request):
+        l=[]
+        s=""
+        obj = FILE.objects.order_by('-pk')[0]
+        loc = obj.data.url
+        for i in range(5):
+            for j in range(5):
+                l.append(request.GET.get('field'+str(i)+str(j)))
+        s1 = [str(i) for i in l]
+        s = ' '.join(s1)
+        loc1 = BASE_DIR+ "/static/source "+BASE_DIR+loc+' '+ BASE_DIR+'/media/images/output.jpg ' +'6 '+s 
+        os.system(loc1)
+        return render(request, 'customed.html' , {'s':s,'path':loc })

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="well well-lg text-center">
+        <h3 style="color: #ffffff; padding-bottom: 3% ;">Enter Kernel</h3>
+        <form action={% url 'customed' %} id="inputField" role="form">
+            <input type="text" name="field00" size="3" style="padding: 1%;">
+            <input type="text" name="field01" size="3" style="padding: 1%;">
+            <input type="text" name="field02" size="3" style="padding: 1%;">
+            <input type="text" name="field03" size="3" style="padding: 1%;">
+            <input type="text" name="field04" size="3" style="padding: 1%;">
+            <br>
+            <input type="text" name="field10" size="3" style="padding: 1%;">
+            <input type="text" name="field11" size="3" style="padding: 1%;">
+            <input type="text" name="field12" size="3" style="padding: 1%;">
+            <input type="text" name="field13" size="3" style="padding: 1%;">
+            <input type="text" name="field14" size="3" style="padding: 1%;">
+            <br>
+            <input type="text" name="field20" size="3" style="padding: 1%;">
+            <input type="text" name="field21" size="3" style="padding: 1%;">
+            <input type="text" name="field22" size="3" style="padding: 1%;">
+            <input type="text" name="field23" size="3" style="padding: 1%;">
+            <input type="text" name="field24" size="3" style="padding: 1%;">
+            <br>
+            <input type="text" name="field30" size="3" style="padding: 1%;">
+            <input type="text" name="field31" size="3" style="padding: 1%;">
+            <input type="text" name="field32" size="3" style="padding: 1%;">
+            <input type="text" name="field33" size="3" style="padding: 1%;">
+            <input type="text" name="field34" size="3" style="padding: 1%;">
+            <br>
+            <input type="text" name="field40" size="3" style="padding: 1%;">
+            <input type="text" name="field41" size="3" style="padding: 1%;">
+            <input type="text" name="field42" size="3" style="padding: 1%;">
+            <input type="text" name="field43" size="3" style="padding: 1%;">
+            <input type="text" name="field44" size="3" style="padding: 1%;">
+            <br>
+            <div class="container text-center" style="padding-top: 5%;">
+                <input type="submit" value="Submit" name="calculate" class="btn btn-primary btn-lg">
+            </div>
+        </form>
+        <div id="resultField">
+            
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
